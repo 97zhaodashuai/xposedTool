@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhaodsh.xposedtool">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +24,7 @@
 
         <meta-data
             android:name="xposedmodule"
-            android:value="true" />
+            android:value="false" />
 
         <!-- 模块描述，显示在xposed模块列表那里第二行 -->
         <meta-data

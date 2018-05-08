@@ -38,151 +38,221 @@ public class yybhook {
 //        });
 
 //        XposedHelpers.findAndHookMethod(
-//            XposedHelpers.findClass("com.tencent.assistant.protocol.j",loadPackageParam.classLoader),
+//            XposedHelpers.findClass("com.tencent.assistant.protocol.k",loadPackageParam.classLoader),
 //            "a",
-//            int.class,
-//            XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Request",loadPackageParam.classLoader),
-//            List.class,
-//            XposedHelpers.findClass("com.tencent.assistant.protocol.ProtocolDecoder",loadPackageParam.classLoader),
+//            int.class, int.class,
+//            XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Net",loadPackageParam.classLoader),
 //            new XC_MethodHook() {
 //                @Override
 //                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                    XposedBridge.log(new Exception("com.tencent.assistant.protocol.j"));
 //                }
 //
 //                @Override
 //                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//
+//                    Object  result = param.getResult();
+//                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
+//                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
+//                        String res = (String)toString.invoke(result);
+//                        XposedBridge.log("res: " + res);
 //                }
 //            });
 
 
         XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.module.aw",loadPackageParam.classLoader),
-                "send",
-                XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader),
+                XposedHelpers.findClass("com.tencent.assistant.protocol.k",loadPackageParam.classLoader),
+                "a",
+                int.class, int.class,
+                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Net",loadPackageParam.classLoader),
                 new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 
-                        XposedBridge.log(new Exception("aw.send  zhan"));
+                        int p1 = (int)param.args[0];
+                        int p2 = (int)param.args[1];
 
-//                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
-//                        Object param_0 = (Object) param.args[0];
-//                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
-//                        String res = (String)toString.invoke(param_0);
+                        XposedBridge.log("p1: " + p1);
+                        XposedBridge.log("p2: " + p2);
+
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        Object  result = param.getResult();
+                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
+                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
+                        String res = (String)toString.invoke(result);
+                        XposedBridge.log("res: " + res);
+                    }
+                });
+
+
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.l",loadPackageParam.classLoader),
+//                "a",
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 //
-//                        XposedBridge.log(param_0.getClass().getName());
-//                        XposedBridge.log("request: " + res);
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-
-                    }
-                });
-
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+////                        byte[] result = (byte[])param.getResult();
+////                        XposedBridge.log("l.a: " + ByteArrayToHexString(result));
+//                    }
+//                });
 
 
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.component.appdetail.e",loadPackageParam.classLoader),
-                "getStInfo",
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 
-                        XposedBridge.log(new Exception("appdetail.e.getStInfo  zhan"));
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.l",loadPackageParam.classLoader),
+//                "a",
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Request",loadPackageParam.classLoader),
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Net",loadPackageParam.classLoader),
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        Object  obj = (Object)param.args[0];
+////                        XposedBridge.log("getSimpleName " + obj.getClass().getSimpleName());
+////                        XposedBridge.log("getCanonicalName " + obj.getClass().getCanonicalName());
+////                        XposedBridge.log("getName " + obj.getClass().getName());
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+////                        byte[] result = (byte[])param.getResult();
+////                        XposedBridge.log("l.a: " + ByteArrayToHexString(result));
+//                    }
+//                });
 
-                    }
 
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object res = (Object) param.getResult();
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.h",loadPackageParam.classLoader),
+//                "a",
+//                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Request",loadPackageParam.classLoader),
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        Object  obj = (Object)param.args[0];
+////                        XposedBridge.log("getSimpleName " + obj.getClass().getSimpleName());
+////                        XposedBridge.log("getCanonicalName " + obj.getClass().getCanonicalName());
+////                        XposedBridge.log("getName " + obj.getClass().getName());
+//                        XposedBridge.log(new Exception("new stack"));
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+////                        byte[] result = (byte[])param.getResult();
+////                        XposedBridge.log("l.a: " + ByteArrayToHexString(result));
+//                    }
+//                });
 
-                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
-                        Field field  = STInfoV2.getDeclaredField("recommendId");
-                        byte[] ba = (byte[])field.get(res);
-                        XposedBridge.log("extractdata: " + ByteArrayToHexString(ba));
-
-                    }
-                });
 
 
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistantv2.activity.AppDetailActivityV5",loadPackageParam.classLoader),
-                "O",
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 
-                        XposedBridge.log(new Exception("AppDetailActivityV5.o  zhan"));
 
-                    }
 
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.component.appdetail.e",loadPackageParam.classLoader),
+//                "getStInfo",
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                        XposedBridge.log(new Exception("appdetail.e.getStInfo  zhan"));
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        Object res = (Object) param.getResult();
+//
+//                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
+//                        Field field  = STInfoV2.getDeclaredField("recommendId");
+//                        byte[] ba = (byte[])field.get(res);
+//                        XposedBridge.log("extractdata: " + ByteArrayToHexString(ba));
+//
+//                    }
+//                });
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistantv2.activity.AppDetailActivityV5",loadPackageParam.classLoader),
+//                "O",
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                        XposedBridge.log(new Exception("AppDetailActivityV5.o  zhan"));
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+////                        Object res = (Object) param.getResult();
+////
+////                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
+////                        Field field  = STInfoV2.getDeclaredField("recommendId");
+////                        byte[] ba = (byte[])field.get(res);
+////                        XposedBridge.log("extractdata2: " + ByteArrayToHexString(ba));
+//
+//                    }
+//                });
+//
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistantv2.activity.AppDetailActivityV5",loadPackageParam.classLoader),
+//                "i",
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                        XposedBridge.log(new Exception("AppDetailActivityV5.i  zhan"));
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 //                        Object res = (Object) param.getResult();
 //
 //                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
 //                        Field field  = STInfoV2.getDeclaredField("recommendId");
 //                        byte[] ba = (byte[])field.get(res);
 //                        XposedBridge.log("extractdata2: " + ByteArrayToHexString(ba));
-
-                    }
-                });
-
-
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistantv2.activity.AppDetailActivityV5",loadPackageParam.classLoader),
-                "i",
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-                        XposedBridge.log(new Exception("AppDetailActivityV5.i  zhan"));
-
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object res = (Object) param.getResult();
-
-                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
-                        Field field  = STInfoV2.getDeclaredField("recommendId");
-                        byte[] ba = (byte[])field.get(res);
-                        XposedBridge.log("extractdata2: " + ByteArrayToHexString(ba));
-                        field.set(res, null);
-                    }
-                });
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistantv2.st.page.STInfoBuilder",loadPackageParam.classLoader),
-                "buildSTInfo",
-                Context.class,
-                XposedHelpers.findClass("com.tencent.assistant.model.SimpleAppModel",loadPackageParam.classLoader),
-                String.class,
-                        int.class,
-                        String.class,
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-                        XposedBridge.log(new Exception(" STInfoBuilder.buildSTInfo  zhan"));
-
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object res = (Object) param.getResult();
-
-                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
-                        Field field  = STInfoV2.getDeclaredField("recommendId");
-                        byte[] ba = (byte[])field.get(res);
-                        XposedBridge.log("extractdata3: " + ByteArrayToHexString(ba));
-
-                    }
-                });
+//                        field.set(res, null);
+//                    }
+//                });
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistantv2.st.page.STInfoBuilder",loadPackageParam.classLoader),
+//                "buildSTInfo",
+//                Context.class,
+//                XposedHelpers.findClass("com.tencent.assistant.model.SimpleAppModel",loadPackageParam.classLoader),
+//                String.class,
+//                        int.class,
+//                        String.class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                        XposedBridge.log(new Exception(" STInfoBuilder.buildSTInfo  zhan"));
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        Object res = (Object) param.getResult();
+//
+//                        Class STInfoV2 = XposedHelpers.findClass("com.tencent.assistantv2.st.model.STCommonInfo",loadPackageParam.classLoader);
+//                        Field field  = STInfoV2.getDeclaredField("recommendId");
+//                        byte[] ba = (byte[])field.get(res);
+//                        XposedBridge.log("extractdata3: " + ByteArrayToHexString(ba));
+//
+//                    }
+//                });
 
 
 
@@ -418,15 +488,11 @@ public class yybhook {
     }
 
     private static String ByteArrayToHexString(byte[] bytes) {
-        final char[] hexArray = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-        char[] hexChars = new char[bytes.length * 2];
-        int v;
-        for ( int j = 0; j < bytes.length; j++ ) {
-            v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02X ", b));
         }
-        return new String(hexChars);
+        return sb.toString();
     }
 
 
