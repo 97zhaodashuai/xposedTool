@@ -17,12 +17,13 @@ public class g {
     private int j;
     private Random k = new Random();
 
+    public byte[] encrypt(byte[] param) {
+        return b(param, 0, param.length, d());
+    }
 
     private int b() {
         return k.nextInt();
     }
-
-
     public byte[] b(byte[] p0, int p1, int p2, byte[] p3) {
 
         byte v1 = 1;
@@ -196,6 +197,10 @@ public class g {
             v7 = (p1 + 1);
         }
         return ((v1 >> 32) | (0xFFFFFFFF & v1));
+    }
+
+    protected byte[] d() {
+        return "ji*9^&43U0X-~./(".getBytes();
     }
 
 
