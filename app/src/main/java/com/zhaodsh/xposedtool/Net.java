@@ -7,39 +7,43 @@ import com.qq.taf.jce.JceStruct;
 public class Net extends JceStruct {
 
     public byte netType = 0;
-
+    public int nacMode = 0;
+    public byte ipType = 2;
     public String extNetworkOperator = "";
-
     public int extNetworkType = 0;
-
     public byte isWap = 0;
+
+
 
     public Net() {
     }
 
     @Override
-    public void writeTo(JceOutputStream jceOutputStream) {
-        jceOutputStream.write(netType, 0);
-        if (null != extNetworkOperator) {
-            jceOutputStream.write(extNetworkOperator, 1);
-        }
-        jceOutputStream.write(extNetworkType, 2);
-        jceOutputStream.write(isWap, 3);
+    public void writeTo(JceOutputStream paramJceOutputStream) {
+        paramJceOutputStream.write(netType, 0);
+        paramJceOutputStream.write(nacMode, 1);
+        paramJceOutputStream.write(ipType, 2);
+        if (extNetworkOperator != null)
+            paramJceOutputStream.write(extNetworkOperator, 3);
+        paramJceOutputStream.write(extNetworkType, 4);
+        paramJceOutputStream.write(isWap, 5);
+
+
+
     }
 
     @Override
-    public void readFrom(JceInputStream jceInputStream) {
-        netType = jceInputStream.read(netType, 0, true);
-        extNetworkOperator = jceInputStream.readString(1, false);
-        extNetworkType = jceInputStream.read(extNetworkType, 2, false);
-        isWap = jceInputStream.read(isWap, 3, false);
-    }
+    public void readFrom(JceInputStream paramJceInputStream) {
 
-    public Net(byte paramByte1, String paramString, int paramInt, byte paramByte2) {
-        netType = paramByte1;
-        extNetworkOperator = paramString;
-        extNetworkType = paramInt;
-        isWap = paramByte2;
+        netType = paramJceInputStream.read(netType, 0, true);
+        nacMode = paramJceInputStream.read(nacMode, 1, true);
+        ipType = paramJceInputStream.read(ipType, 2, false);
+        extNetworkOperator = paramJceInputStream.readString(3, false);
+        extNetworkType = paramJceInputStream.read(extNetworkType, 4, false);
+        isWap = paramJceInputStream.read(isWap, 5, false);
+
+
+
     }
 
 

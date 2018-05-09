@@ -6,81 +6,70 @@ import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
 
 public final class ReqHead extends JceStruct {
+
+    public int requestId = 0;
+    public int cmdId = 0;
+    public String phoneGuid = "";
+    public Ticket ticket = null;
+    public String qua = "";
+    public Net net = null;
+    public short areacode = (short) 0;
+    public Terminal terminal = null;
+    public long uin = 0L;
+    public String moloDeviceId = "";
+    public byte encryptWithPack = (byte) 0;
+    public byte isForeground = (byte) 0;
+    public byte caller = (byte) 0;
     static Ticket n;
     static Net o;
     static Terminal p;
-    public int a = 0;
-    public int b = 0;
-    public String c = "";
-    public Ticket d = null;
-    public String e = "";
-    public Net f = null;
-    public short g = (short) 0;
-    public Terminal h = null;
-    public long i = 0L;
-    public String j = "";
-    public byte k = (byte) 0;
-    public byte l = (byte) 0;
-    public byte m = (byte) 0;
-
-    public void display(StringBuilder paramStringBuilder, int paramInt)
-    {
-//        paramStringBuilder = new JceDisplayer(paramStringBuilder, paramInt);
-//        paramStringBuilder.display(a, "requestId");
-//        paramStringBuilder.display(b, "cmdId");
-//        paramStringBuilder.display(c, "phoneGuid");
-//        paramStringBuilder.display(d, "ticket");
-//        paramStringBuilder.display(e, "qua");
-//        paramStringBuilder.display(f, "net");
-//        paramStringBuilder.display(g, "areacode");
-//        paramStringBuilder.display(h, "terminal");
-//        paramStringBuilder.display(i, "uin");
-//        paramStringBuilder.display(j, "moloDeviceId");
-//        paramStringBuilder.display(k, "encryptWithPack");
-//        paramStringBuilder.display(l, "isForeground");
-//        paramStringBuilder.display(m, "caller");
-    }
 
 
     public void readFrom(JceInputStream paramJceInputStream) {
-        a = paramJceInputStream.read(a, 0, true);
-        b = paramJceInputStream.read(b, 1, true);
-        c = paramJceInputStream.readString(2, true);
+        requestId = paramJceInputStream.read(requestId, 0, true);
+        cmdId = paramJceInputStream.read(cmdId, 1, true);
+        phoneGuid = paramJceInputStream.readString(2, true);
         if (n == null)
             n = new Ticket();
-        d = ((Ticket) paramJceInputStream.read(n, 3, false));
-        e = paramJceInputStream.readString(4, true);
+        ticket = ((Ticket) paramJceInputStream.read(n, 3, false));
+        qua = paramJceInputStream.readString(4, true);
         if (o == null)
             o = new Net();
-        f = ((Net) paramJceInputStream.read(o, 5, true));
-        g = paramJceInputStream.read(g, 6, true);
+        net = ((Net) paramJceInputStream.read(o, 5, true));
+        areacode = paramJceInputStream.read(areacode, 6, true);
         if (p == null)
             p = new Terminal();
-        h = ((Terminal) paramJceInputStream.read(p, 7, false));
-        i = paramJceInputStream.read(i, 8, false);
-        j = paramJceInputStream.readString(9, false);
-        k = paramJceInputStream.read(k, 10, false);
-        l = paramJceInputStream.read(l, 11, false);
-        m = paramJceInputStream.read(m, 12, false);
+        terminal = ((Terminal) paramJceInputStream.read(p, 7, false));
+        uin = paramJceInputStream.read(uin, 8, false);
+        moloDeviceId = paramJceInputStream.readString(9, false);
+        encryptWithPack = paramJceInputStream.read(encryptWithPack, 10, false);
+        isForeground = paramJceInputStream.read(isForeground, 11, false);
+        caller = paramJceInputStream.read(caller, 12, false);
     }
 
 
     public void writeTo(JceOutputStream paramJceOutputStream) {
-        paramJceOutputStream.write(a, 0);
-        paramJceOutputStream.write(b, 1);
-        paramJceOutputStream.write(c, 2);
-        if (d != null)
-            paramJceOutputStream.write(d, 3);
-        paramJceOutputStream.write(e, 4);
-        paramJceOutputStream.write(f, 5);
-        paramJceOutputStream.write(g, 6);
-        if (h != null)
-            paramJceOutputStream.write(h, 7);
-        paramJceOutputStream.write(i, 8);
-        if (j != null)
-            paramJceOutputStream.write(j, 9);
-        paramJceOutputStream.write(k, 10);
-        paramJceOutputStream.write(l, 11);
-        paramJceOutputStream.write(m, 12);
+        paramJceOutputStream.write(requestId, 0);
+        paramJceOutputStream.write(cmdId, 1);
+        paramJceOutputStream.write(phoneGuid, 2);
+        if (ticket != null) {
+            paramJceOutputStream.write(ticket, 3);
+        }
+        paramJceOutputStream.write(qua, 4);
+        if (net != null) {
+            paramJceOutputStream.write(net, 5);
+        }
+
+        paramJceOutputStream.write(areacode, 6);
+        if (terminal != null) {
+            paramJceOutputStream.write(terminal, 7);
+        }
+        paramJceOutputStream.write(uin, 8);
+        if (moloDeviceId != null) {
+            paramJceOutputStream.write(moloDeviceId, 9);
+        }
+        paramJceOutputStream.write(encryptWithPack, 10);
+        paramJceOutputStream.write(isForeground, 11);
+        paramJceOutputStream.write(caller, 12);
     }
 }

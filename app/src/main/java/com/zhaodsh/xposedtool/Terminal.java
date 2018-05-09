@@ -6,31 +6,31 @@ import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
 
 public final class Terminal extends JceStruct {
-    public String a = "";
-    public String b = "";
-    public String c = "";
-    public String d = "";
-    public String e = "";
+    public String imei = "";
+    public String macAdress = "";
+    public String androidId = "";
+    public String androidIdSdCard = "";
+    public String imsi = "";
 
 
     public void readFrom(JceInputStream paramJceInputStream) {
-        a = paramJceInputStream.readString(0, false);
-        b = paramJceInputStream.readString(1, false);
-        c = paramJceInputStream.readString(2, false);
-        d = paramJceInputStream.readString(3, false);
-        e = paramJceInputStream.readString(4, false);
+        imei = paramJceInputStream.readString(0, false);
+        macAdress = paramJceInputStream.readString(1, false);
+        androidId = paramJceInputStream.readString(2, false);
+        androidIdSdCard = paramJceInputStream.readString(3, false);
+        imsi = paramJceInputStream.readString(4, false);
     }
 
     public void writeTo(JceOutputStream paramJceOutputStream) {
-        if (a != null)
-            paramJceOutputStream.write(a, 0);
-        if (b != null)
-            paramJceOutputStream.write(b, 1);
-        if (c != null)
-            paramJceOutputStream.write(c, 2);
-        if (d != null)
-            paramJceOutputStream.write(d, 3);
-        if (e != null)
-            paramJceOutputStream.write(e, 4);
+        if (imei != null)
+            paramJceOutputStream.write(imei, 0);
+        if (macAdress != null)
+            paramJceOutputStream.write(macAdress, 1);
+        if (androidId != null)
+            paramJceOutputStream.write(androidId, 2);
+        if (androidIdSdCard != null)
+            paramJceOutputStream.write(androidIdSdCard, 3);
+        if (imsi != null)
+            paramJceOutputStream.write(imsi, 4);
     }
 }

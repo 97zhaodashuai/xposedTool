@@ -15,22 +15,32 @@ import org.apache.http.params.CoreConnectionPNames;
 public class yybhttp {
 
 
-    public  void _main() {
+    public void _main() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                aaa bbb = new aaa();
-                bbb.version = 4112127;
+                int cmd_id = 4;
+                int request_id = 1;
 
-                int cmd_id_GetSearchHotWords = 9;
+                //SearchRequest
+                aaa req = new aaa();
+                req.keyword = "桌面";
+                req.contextData = new byte[0];
+                req.pageSize = 10;
+                req.searchScene = 200702;
+                req.searchId = 0;
+
                 Net net = new Net();
+                net.netType = 1;
+                net.nacMode = 757797134;
+                net.ipType = 1;
                 net.extNetworkOperator = "";
                 net.extNetworkType = -1;
-                net.netType = 1;
                 net.isWap = 0;
-                Request req = ka(cmd_id_GetSearchHotWords, 1, net, bbb);
-                httpPost(req);
+
+                Request reqest = ka(cmd_id, request_id, net, req);
+                httpPost(reqest);
             }
         }).start();
 
@@ -38,14 +48,38 @@ public class yybhttp {
     }
 
 
-    static public Request ka(int p0,/*cmdid*/ int p1,/*requestid*/ Net p2, JceStruct p3) {
+    static public Request ka(int cmdid, int requestid, Net net, JceStruct request) {
         Request req = new Request();
-        ReqHead header = ka(p0, p1, p2);
-        req.a = header;
-        byte[] tmp = kb(p3);
-        req.b = tmp;
+        req.head = ka(cmdid, requestid, net);
+        req.body = kb(request);
         return req;
     }
+
+    static private ReqHead ka(int cmdId, int requestId, Net net) {
+        ReqHead head = new ReqHead();
+        head.requestId = requestId;
+        head.cmdId = cmdId;
+        head.phoneGuid = "1314036323888842816";
+
+        Ticket ticket = new Ticket();
+        ticket.type = 0;
+        ticket.value = new byte[0];
+        head.ticket = ticket;
+
+        head.qua = "TMA_411/040447&NA/040447&5.1.1_22_1&111_67_14&google_Nexus5&992019&NA&V3";
+        head.net = net;
+        head.areacode = 1796;
+
+        head.terminal = null;
+        head.uin = 0;
+        head.moloDeviceId = "1523864357451{72b28484-e282-4965-9b9d-a2b6ba66c0fc}129";
+        head.encryptWithPack = 0;
+        head.isForeground = 1;
+        head.caller = 1;
+        return head;
+    }
+
+
 
     static public byte[] kb(JceStruct p0) {
         JceOutputStream v0 = new JceOutputStream();
@@ -56,24 +90,6 @@ public class yybhttp {
         return res;
     }
 
-
-    static private ReqHead ka(int p0, int p1, Net p2) {
-        byte v0;
-        ReqHead head = new ReqHead();
-        head.a = p1;   //requestId
-        head.b = p0;   //cmdId
-        head.f = p2;
-        head.l = 1;  // isForeground
-        head.j = "1523864357451{72b28484-e282-4965-9b9d-a2b6ba66c0fc}129"; //moloDeviceId
-        head.g = 0; //areacode
-        head.c = "1314036323888842816";  //phoneGuid
-        head.e = "TMA_411/040447&NA/040447&5.1.1_22_1&111_67_14&google_Nexus5&992019&NA&V3"; //qua
-        head.h = null;  //terminal
-        Ticket tick = new Ticket();
-        head.d = tick;  //Ticket
-        head.m = 1;  //caller
-        return head;
-    }
 
 
     public static void httpPost(Request request) {
@@ -87,15 +103,15 @@ public class yybhttp {
             httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 2000);
             httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
 
-            post = new HttpPost("http://101.227.131.50:80");
+            post = new HttpPost("http://14.17.43.45:80");
             // 构造消息头
             post.setHeader("User-Agent", "TMA/4.1.1");
             post.setHeader("X-Online-Host", "ma.3g.qq.com");
-            post.setHeader("Host", "101.227.131.50:80");
+            post.setHeader("Host", "14.17.43.45:80");
             post.setHeader("x-tx-host", "ma.3g.qq.com");
 
             // 构建消息实体
-            post.setEntity( new ByteArrayEntity(kb(request)));
+            post.setEntity(new ByteArrayEntity(kb(request)));
 
             HttpResponse response = httpClient.execute(post);
             int code = response.getStatusLine().getStatusCode();
