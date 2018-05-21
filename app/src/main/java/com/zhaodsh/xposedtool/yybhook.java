@@ -50,12 +50,89 @@ public class yybhook {
                 });
 
 
+                XposedHelpers.findAndHookMethod(
+                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+                "a",
+                byte[].class,
+                byte[].class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        byte[] p1 = (byte[])param.args[0];
+                        byte[] p2 = (byte[])param.args[1];
+
+                        byte[] tmp = {0x06, 0x00};
+                        param.args[0] = tmp;
+
+                        printByteArray("zds p1",p1);
+                        printByteArray("zds p2",p2);
+
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        byte[] r1 = (byte[])param.getResult();
+                        printByteArray("zds r1", r1);
+                    }
+                });
+
+
+        XposedHelpers.findAndHookMethod(
+                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+                "b",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        param.setResult(5);
+                    }
+                });
+
+
+
+        XposedHelpers.findAndHookMethod(
+                XposedHelpers.findClass("com.tencent.assistant.login.a.a",loadPackageParam.classLoader),
+                "a",
+                byte[].class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedBridge.log( "zds: " + "com.tencent.assistant.login.a.a.a in");
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    }
+                });
+
+
+        XposedHelpers.findAndHookMethod(
+                XposedHelpers.findClass("com.tencent.assistant.login.a.a",loadPackageParam.classLoader),
+                "b",
+                byte[].class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedBridge.log("zds: " + "com.tencent.assistant.login.a.a.b");
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    }
+                });
+
+
+
     }
 
 
 
 
-    private void printByteArray(String tag, byte[] bytes){
+    private static void  printByteArray(String tag, byte[] bytes){
         XposedBridge.log(tag + ": " + ByteArrayToHexString(bytes));
     }
     private static String ByteArrayToHexString(byte[] bytes) {
