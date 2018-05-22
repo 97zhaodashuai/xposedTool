@@ -1,10 +1,10 @@
-package com.zhaodsh.xposedtool;
+package com.example.http_yyb;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Random;
 
-public class g {
+public class encrpytUtils {
     private byte[] a;
     private byte[] b;
     private byte[] c;

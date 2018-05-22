@@ -36,7 +36,6 @@ public class yybhook {
 
                         res = (String)toString.invoke(p4);
                         XposedBridge.log("1 k.a p4: " + res);
-
                     }
 
                     @Override
@@ -60,10 +59,6 @@ public class yybhook {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         byte[] p1 = (byte[])param.args[0];
                         byte[] p2 = (byte[])param.args[1];
-
-                        byte[] tmp = {0x06, 0x00};
-                        param.args[0] = tmp;
-
                         printByteArray("zds p1",p1);
                         printByteArray("zds p2",p2);
 
@@ -91,41 +86,6 @@ public class yybhook {
                         param.setResult(5);
                     }
                 });
-
-
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.login.a.a",loadPackageParam.classLoader),
-                "a",
-                byte[].class,
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        XposedBridge.log( "zds: " + "com.tencent.assistant.login.a.a.a in");
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    }
-                });
-
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.login.a.a",loadPackageParam.classLoader),
-                "b",
-                byte[].class,
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        XposedBridge.log("zds: " + "com.tencent.assistant.login.a.a.b");
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    }
-                });
-
-
 
     }
 

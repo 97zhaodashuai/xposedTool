@@ -1,6 +1,4 @@
-package com.zhaodsh.xposedtool;
-
-import android.util.Log;
+package com.example.http_yyb;
 
 import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
@@ -12,10 +10,11 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
-public class yybhttp {
+public class yybMain {
 
+    public  static void main(String[] args) {
 
-    public void _main() {
+//        System.out.println("hello world");
 
         new Thread(new Runnable() {
             @Override
@@ -24,23 +23,23 @@ public class yybhttp {
                 int request_id = 1;
 
                 //SearchRequest
-                aaa req = new aaa();
-                req.keyword = "桌面";
-                req.contextData = new byte[0];
-                req.pageSize = 10;
-                req.searchScene = 200702;
-                req.searchId = 0;
-
-                Net net = new Net();
-                net.netType = 1;
-                net.nacMode = 757797134;
-                net.ipType = 1;
-                net.extNetworkOperator = "";
-                net.extNetworkType = -1;
-                net.isWap = 0;
-
-                Request reqest = ka(cmd_id, request_id, net, req);
-                httpPost(reqest);
+//                aaa req = new aaa();
+//                req.keyword = "桌面";
+//                req.contextData = new byte[0];
+//                req.pageSize = 10;
+//                req.searchScene = 200702;
+//                req.searchId = 0;
+//
+//                Net net = new Net();
+//                net.netType = 1;
+//                net.nacMode = 757797134;
+//                net.ipType = 1;
+//                net.extNetworkOperator = "";
+//                net.extNetworkType = -1;
+//                net.isWap = 0;
+//
+//                Request reqest = ka(cmd_id, request_id, net, req);
+//                httpPost(reqest);
             }
         }).start();
 
@@ -115,7 +114,6 @@ public class yybhttp {
 
             HttpResponse response = httpClient.execute(post);
             int code = response.getStatusLine().getStatusCode();
-            Log.e("zhaodsh", code + "");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,7 +121,3 @@ public class yybhttp {
     }
 
 }
-
-
-
-
