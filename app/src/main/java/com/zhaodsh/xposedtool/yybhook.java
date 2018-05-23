@@ -17,6 +17,31 @@ public class yybhook {
 
     public static void init(final XC_LoadPackage.LoadPackageParam loadPackageParam) {
 
+
+        XposedHelpers.findAndHookMethod(
+                XposedHelpers.findClass("com.tencent.assistant.g.g",loadPackageParam.classLoader),
+                "a",
+                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.StatAppDownlaodWithChunk",loadPackageParam.classLoader),
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
+                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
+                        Object p1 = (Object)param.args[0];
+
+                        String res = (String)toString.invoke(p1);
+                        XposedBridge.log("StatAppDownlaodWithChunk: " + res);
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    }
+                });
+
+
+
+
         XposedHelpers.findAndHookMethod(
                 XposedHelpers.findClass("com.tencent.assistant.protocol.k",loadPackageParam.classLoader),
                 "a",

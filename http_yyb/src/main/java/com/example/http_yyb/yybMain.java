@@ -1,5 +1,8 @@
 package com.example.http_yyb;
 
+import com.example.http_yyb.factory.StatAppDownloadWithChunkFactory;
+import com.example.http_yyb.protocol.StatAppDownlaodWithChunk;
+import com.example.http_yyb.protocol.StatReportRequest;
 import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
 
@@ -22,24 +25,17 @@ public class yybMain {
                 int cmd_id = 4;
                 int request_id = 1;
 
-                //SearchRequest
-//                aaa req = new aaa();
-//                req.keyword = "桌面";
-//                req.contextData = new byte[0];
-//                req.pageSize = 10;
-//                req.searchScene = 200702;
-//                req.searchId = 0;
-//
-//                Net net = new Net();
-//                net.netType = 1;
-//                net.nacMode = 757797134;
-//                net.ipType = 1;
-//                net.extNetworkOperator = "";
-//                net.extNetworkType = -1;
-//                net.isWap = 0;
-//
-//                Request reqest = ka(cmd_id, request_id, net, req);
-//                httpPost(reqest);
+                StatReportRequest reportRequest = StatAppDownloadWithChunkFactory.build();
+
+                Net net = new Net();
+                net.netType = 1;
+                net.nacMode = 757797134;
+                net.ipType = 1;
+                net.extNetworkOperator = "";
+                net.extNetworkType = -1;
+                net.isWap = 0;
+                Request reqest = ka(cmd_id, request_id, net, reportRequest);
+                httpPost(reqest);
             }
         }).start();
 
