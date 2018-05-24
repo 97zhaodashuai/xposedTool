@@ -64,6 +64,10 @@ public class StatAppDownloadWithChunkFactory {
         appdownload.D = 0;
         appdownload.E = "";
 
+        
+
+
+
 
         return null;
     }
