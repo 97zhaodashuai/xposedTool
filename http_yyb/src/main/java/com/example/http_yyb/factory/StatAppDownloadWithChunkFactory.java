@@ -4,6 +4,7 @@ import com.example.http_yyb.protocol.AppChunkDownlaod;
 import com.example.http_yyb.protocol.Reporter;
 import com.example.http_yyb.protocol.Speed;
 import com.example.http_yyb.protocol.StatAppDownlaodWithChunk;
+import com.example.http_yyb.protocol.StatReportItem;
 import com.example.http_yyb.protocol.StatReportRequest;
 import com.sun.org.apache.regexp.internal.RE;
 
@@ -64,12 +65,16 @@ public class StatAppDownloadWithChunkFactory {
         appdownload.D = 0;
         appdownload.E = "";
 
-        
+        StatReportItem item = new StatReportItem();
+        item.a = 14;
+        item.b = 0;
+        item.c = null;
 
+        req = new StatReportRequest();
+        req.a = new ArrayList();
+        req.a.add(item);
 
-
-
-        return null;
+        return req;
     }
 
 
@@ -139,6 +144,20 @@ public class StatAppDownloadWithChunkFactory {
 //        jceDisplayer.display(this.g, "finalDownloadUrl");
         return  speed;
     }
+
+
+    private  byte[] Object2ByteArray(StatAppDownlaodWithChunk paramStatAppDownlaodWithChunk){
+        paramStatAppDownlaodWithChunk = k.b(paramStatAppDownlaodWithChunk);
+        Object localObject = f.a(paramStatAppDownlaodWithChunk.length);
+        ByteArrayBuffer localByteArrayBuffer = new ByteArrayBuffer(paramStatAppDownlaodWithChunk.length + 4);
+        localByteArrayBuffer.append(localObject, 0, localObject.length);
+        localByteArrayBuffer.append(paramStatAppDownlaodWithChunk, 0, paramStatAppDownlaodWithChunk.length);
+        af.c().a(a(), localByteArrayBuffer.buffer());
+
+    }
+
+
+
 
 
 
