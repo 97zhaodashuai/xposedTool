@@ -6,7 +6,12 @@ import com.example.http_yyb.protocol.Speed;
 import com.example.http_yyb.protocol.StatAppDownlaodWithChunk;
 import com.example.http_yyb.protocol.StatReportItem;
 import com.example.http_yyb.protocol.StatReportRequest;
+import com.example.http_yyb.yybMain;
+import com.qq.taf.jce.JceOutputStream;
+import com.qq.taf.jce.JceStruct;
 import com.sun.org.apache.regexp.internal.RE;
+
+import org.apache.http.util.ByteArrayBuffer;
 
 import java.util.ArrayList;
 
@@ -68,7 +73,7 @@ public class StatAppDownloadWithChunkFactory {
         StatReportItem item = new StatReportItem();
         item.a = 14;
         item.b = 0;
-        item.c = null;
+        item.c = Object2ByteArray(appdownload);
 
         req = new StatReportRequest();
         req.a = new ArrayList();
@@ -146,15 +151,35 @@ public class StatAppDownloadWithChunkFactory {
     }
 
 
-    private  byte[] Object2ByteArray(StatAppDownlaodWithChunk paramStatAppDownlaodWithChunk){
-        paramStatAppDownlaodWithChunk = k.b(paramStatAppDownlaodWithChunk);
-        Object localObject = f.a(paramStatAppDownlaodWithChunk.length);
-        ByteArrayBuffer localByteArrayBuffer = new ByteArrayBuffer(paramStatAppDownlaodWithChunk.length + 4);
+    private static byte[] Object2ByteArray(StatAppDownlaodWithChunk paramStatAppDownlaodWithChunk){
+        byte[] byte_paramStatAppDownlaodWithChunk = kb(paramStatAppDownlaodWithChunk);
+        byte[] localObject = fa(byte_paramStatAppDownlaodWithChunk.length);
+        ByteArrayBuffer localByteArrayBuffer = new ByteArrayBuffer(byte_paramStatAppDownlaodWithChunk.length + 4);
         localByteArrayBuffer.append(localObject, 0, localObject.length);
-        localByteArrayBuffer.append(paramStatAppDownlaodWithChunk, 0, paramStatAppDownlaodWithChunk.length);
-        af.c().a(a(), localByteArrayBuffer.buffer());
-
+        return localByteArrayBuffer.buffer();
     }
+
+
+    public static byte[] fa(int paramInt)
+    {
+        byte[] arrayOfByte = new byte[4];
+        for (int i = 0; i < 4; i++)
+            arrayOfByte[i] = (byte)(byte)(paramInt >>> 24 - i * 8);
+        return arrayOfByte;
+    }
+
+    static public byte[] kb(JceStruct p0) {
+        JceOutputStream v0 = new JceOutputStream();
+        String v1 = "utf-8";
+        v0.setServerEncoding(v1);
+        p0.writeTo(v0);
+        byte[] res = v0.toByteArray();
+        return res;
+    }
+
+
+
+
 
 
 

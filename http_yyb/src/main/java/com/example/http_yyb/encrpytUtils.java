@@ -15,13 +15,15 @@ public class encrpytUtils {
     private byte[] h;
     private boolean i = true;
     private int j;
-    private Random k = new Random();
+//    private Random k = 5;
 
+    private int k = 5;
     private int b() {
-        return 5;
+        return k;
     }
 
-    public byte[] encode(byte[] param){
+    public  byte[] encode(byte[] param){
+
         byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
         return a(param, key);
     }
@@ -223,8 +225,101 @@ public class encrpytUtils {
 
     public byte[] decode(byte[] param){
         byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
-        return a(param, 0, param.length, key);
+        return aa(param, 0, param.length, key);
     }
+
+
+    public byte[] aa(byte[] p0, int p1, int p2, byte[] p3)    //method@509c
+    {
+        byte v9 = 1;
+        byte v2 = 0;
+        byte v3 = 0;
+        int v8 = 8;
+        this.e = v2;
+        this.d = v2;
+        this.h = p3;
+        byte[] v1 = new byte[(p1 + 8)];
+        if (p2 % 8 == 0 &&  p2 >= 16) {
+            this.b = this.a(p0, p1);
+            if (this.b != null) {
+                this.f = (this.b[v2] & 7);
+                int v4 = ((p2 - this.f) - 10);
+                if (v4 >= 0) {  //?
+                    int a = p1;
+                    while ((a < v1.length)) {
+                        v1[a] = v2;
+                        a++;
+                    }
+                    byte[] v0 = new byte[v4];
+                    this.c = v0;
+                    this.e = v2;
+                    this.d = v8;
+                    this.j = v8;
+                    this.f = (this.f + 1);
+                    this.g = v9;
+                    v0 = v1;
+                    while ((this.g <= 2)) {
+                        if (this.f < v8) {
+                            this.f = (this.f + 1);
+                            this.g = (this.g + 1);
+                        }
+                        if (this.f ==v8){
+                            if (!this.b(p0, p1, p2)) {
+                                return null;
+                            }
+                            v0 = p0;
+                        }
+                    }
+                    int a1 = v4;
+                    int a2 = v2;
+                    byte[] b5 = v0;
+                    while ((a1 != 0)) {
+                        if (this.f < v8) {
+                            this.c[a2] = (byte) ((b5[((this.e + p1) + this.f)] ^ this.b[this.f]));
+                            a2++;
+                            a1--;
+                            this.f = (this.f + 1);
+                        }
+                        if (this.f == v8) {
+                            this.e = (this.d - 8);
+                            if (!this.b(p0, p1, p2)) {
+                                return null;
+                            }
+                            b5 = p0;
+                        }
+                    }
+                    this.g = v9;
+                    byte[] b8 = b5;
+                    while ((this.g < v8)) {
+                        if (this.f < v8) {
+                            if ((b8[((this.e + p1) + this.f)] ^ this.b[this.f]) != 0) {
+                                return null;
+                            }
+                            this.f = this.f + 1;
+                        }
+                        if (this.f == v8) {
+                            this.e = this.d;
+                            if (!this.b(p0, p1, p2)) {
+                                return null;
+                            }
+                            v0 = p0;
+                        }
+                        this.g = (this.g + 1);
+                    }
+                    v0 = this.c;
+                    return v0;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+
 
 
     public byte[] a(byte[] bArr, int i, int i2, byte[] bArr2) {
@@ -306,64 +401,100 @@ public class encrpytUtils {
         }
         return this.c;
     }
+//
+//    private boolean b(byte[] bArr, int i, int i2) {
+//        this.f = 0;
+//        while (this.f < 8) {
+//            if (this.j + this.f >= i2) {
+//                return true;
+//            }
+//            byte[] bArr2 = this.b;
+//            int i3 = this.f;
+//            bArr2[i3] = (byte) (bArr2[i3] ^ bArr[(this.d + i) + this.f]);
+//            this.f++;
+//        }
+//        this.b = b(this.b);
+//        if (this.b == null) {
+//            return false;
+//        }
+//        this.j += 8;
+//        this.d += 8;
+//        this.f = 0;
+//        return true;
+//    }
 
-    private boolean b(byte[] bArr, int i, int i2) {
-        this.f = 0;
-        while (this.f < 8) {
-            if (this.j + this.f >= i2) {
+    private boolean b(byte[] p0, int p1, int p2)    //method@50a0
+    {
+        byte v1 = 0;
+        this.f = v1;
+        while ((this.f < 8)) {
+            if ((this.j + this.f) >= p2) {
                 return true;
             }
-            byte[] bArr2 = this.b;
-            int i3 = this.f;
-            bArr2[i3] = (byte) (bArr2[i3] ^ bArr[(this.d + i) + this.f]);
-            this.f++;
+            byte[] v2 = this.b;
+            int v3 = this.f;
+            v2[v3] = (byte) ((v2[v3] ^ p0[((this.d + p1) + this.f)]));
+            this.f = (this.f + 1);
         }
-        this.b = b(this.b);
-        if (this.b == null) {
+        this.b = this.b(this.b);
+        if (this.b != null) {
+            this.j = (this.j + 8);
+            this.d = (this.d + 8);
+            this.f = v1;
+            return true;
+        } else {
             return false;
         }
-        this.j += 8;
-        this.d += 8;
-        this.f = 0;
-        return true;
     }
+
+
 
     private byte[] b(byte[] bArr) {
         return a(bArr, 0);
     }
 
-    private byte[] a(byte[] bArr, int i) {
-        int i2 = 16;
-        try {
-            long a = a(bArr, i, 4);
-            long a2 = a(bArr, i + 4, 4);
-            long a3 = a(this.h, 0, 4);
-            long a4 = a(this.h, 4, 4);
-            long a5 = a(this.h, 8, 4);
-            long a6 = a(this.h, 12, 4);
-            long j = -478700656 & 4294967295L;
-            long j2 = -1640531527 & 4294967295L;
-            while (true) {
-                int i3 = i2 - 1;
-                if (i2 > 0) {
-                    a2 = (a2 - ((((a << 4) + a5) ^ (a + j)) ^ ((a >>> 5) + a6))) & 4294967295L;
-                    a = (a - ((((a2 << 4) + a3) ^ (a2 + j)) ^ ((a2 >>> 5) + a4))) & 4294967295L;
-                    j = (j - j2) & 4294967295L;
-                    i2 = i3;
-                } else {
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(8);
-                    DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
-                    dataOutputStream.writeInt((int) a);
-                    dataOutputStream.writeInt((int) a2);
-                    dataOutputStream.close();
-                    return byteArrayOutputStream.toByteArray();
-                }
-            }
-        } catch (Exception e) {
-            return null;
+
+    public byte[] a(byte[] p0, int p1)    //method@509b
+    {
+        this.e = 0;
+        this.d = 0;
+        byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
+        this.h = key;
+
+
+        int v8 = 16;
+        long v6 = a(p0, p1, 4);
+        long v4 = a(p0, (p1 + 4), 4);
+        long v10 = a(this.h, 0, 4);
+        long v12 = a(this.h, 4, 4);
+        long v14 = a(this.h, 8, 4);
+        long v16 = a(this.h, 12, 4);
+        long v2 = (-0x1c886470L & 0xffffffffL);
+        long v18 = (-0x61c88647L & 0xffffffffL);
+        int v9 = (v8 - 1);
+        while ((v8 > 0)) {
+
+
+            v4 = (v4 -  ((((v6 << 4) + v14) ^ (v6 + v2)) ^((v6 >>> 5) + v16))) & 0xffffffffL;
+            v6 = (v6 - ((((v4 << 4) + v10) ^(v4 + v2)) ^((v4 >>> 5) + v12))) & 0xffffffffL;
+//            v4 = ((v4 - (((((v6 << 4) + v14) ^ (v6 + v2))) ^ (((v6 >>> 5) + v16))))) & 0xffffffff;
+//            v6 = ((v6 - ((((v4 << 4) + v10) ^ (v4 + v2)) ^ ((v4 >>> 5) + v12))) & 0xffffffff);
+            v2 = ((v2 - v18) & 0xffffffff);
+            v8 = v9;
+            v9 = (v8 - 1);
         }
+        try{
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(8);
+            DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+            dataOutputStream.writeInt((int) v6);
+            dataOutputStream.writeInt((int) v4);
+            dataOutputStream.close();
+            return byteArrayOutputStream.toByteArray();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
-
-
 
 }

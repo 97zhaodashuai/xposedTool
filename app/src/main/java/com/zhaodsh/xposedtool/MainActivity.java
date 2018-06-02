@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 //        yybhttp yyb = new yybhttp();
 //        yyb._main();
 
+        String.va
         g  ginstance = new g();
         byte[] param = {0x06, 0x00};
         byte[] result = ginstance.encode(param);
