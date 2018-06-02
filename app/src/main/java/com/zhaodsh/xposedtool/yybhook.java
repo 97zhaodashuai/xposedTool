@@ -17,80 +17,182 @@ public class yybhook {
 
     public static void init(final XC_LoadPackage.LoadPackageParam loadPackageParam) {
 
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+//                "a",
+//                byte[].class,
+//                int.class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+////                        byte[] p1 = (byte[])param.args[0];
+////                        byte[] p2 = (byte[])param.args[3];
+////                        printByteArray("zds p1",p1);
+////                        printByteArray("zds p2",p2);
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] r1 = (byte[])param.getResult();
+//                        printByteArray("zds gabi:", r1);
+//                    }
+//                });
+//
+//
+//
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+//                "a",
+//                byte[].class,
+//                int.class,
+//                int.class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] p1 = (byte[])param.args[0];
+//                        printByteArray("zds p1",p1);
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        long r1 = (long)param.getResult();
+//                        printlog("gabii r: " ,  r1);
+//                    }
+//                });
+//
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+//                "a",
+//                byte[].class,
+//                int.class,
+//                int.class,
+//                byte[].class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] p1 = (byte[])param.args[0];
+//                        byte[] p2 = (byte[])param.args[3];
+//                        printByteArray("zds p1",p1);
+//                        printByteArray("zds p2",p2);
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] r1 = (byte[])param.getResult();
+//                        printByteArray("zds r1", r1);
+//                    }
+//                });
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
+//                "b",
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        param.setResult(5);
+//                    }
+//                });
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.login.d",loadPackageParam.classLoader),
+//                "b",
+//                boolean.class,
+//                byte[].class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        boolean b = (boolean) param.args[0];
+//                        printlog("login.d.b param 0:", b);
+//                        byte[] p = (byte[]) param.args[1];
+//                        printlog("login.d.b param 1 size:", p.length);
+//                        printByteArray("login.d.b param 1:" ,  p);
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] r = (byte[])param.getResult();
+//                        printByteArray("login.d.b result:" ,  r);
+//                    }
+//                });
+//
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.login.d",loadPackageParam.classLoader),
+//                "a",
+//                boolean.class,
+//                byte[].class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] p = (byte[]) param.args[1];
+//                        printByteArray("login.d.a param:" ,  p);
+//                    }
+//
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] r = (byte[])param.getResult();
+//                        printByteArray("login.d.a result:" ,  r);
+//                    }
+//                });
+
+
         XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.protocol.k",loadPackageParam.classLoader),
-                "a",
-                int.class, int.class,
-                XposedHelpers.findClass("com.tencent.assistant.protocol.jce.Net",loadPackageParam.classLoader),
-                XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader),
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
-                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
-                        Object p3 = (Object)param.args[2];
-                        Object p4 = (Object)param.args[3];
-
-                        String res = (String)toString.invoke(p3);
-                        XposedBridge.log("1 k.a p3: " + res);
-
-                        res = (String)toString.invoke(p4);
-                        XposedBridge.log("1 k.a p4: " + res);
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        Object  result = param.getResult();
-                        Class JceStruct = XposedHelpers.findClass("com.qq.taf.jce.JceStruct",loadPackageParam.classLoader);
-                        Method toString = XposedHelpers.findMethodBestMatch(JceStruct, "toString");
-                        String res = (String)toString.invoke(result);
-                        XposedBridge.log("result: " + res);
-                    }
-                });
-
-
-                XposedHelpers.findAndHookMethod(
                 XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
                 "a",
                 byte[].class,
-                byte[].class,
+                int.class,
                 new XC_MethodHook() {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        byte[] p1 = (byte[])param.args[0];
-                        byte[] p2 = (byte[])param.args[1];
-                        printByteArray("zds p1",p1);
-                        printByteArray("zds p2",p2);
+//                        byte[] p = (byte[]) param.args[0];
+//                        printByteArray("utils.g.abi:" ,  p);
+                        param.args[0] = new byte[]{(byte)0x71,(byte)0x45,(byte)0xEB,(byte)0xE8,(byte)0x62,(byte)0x95,(byte)0xF5,(byte)0xC7};
 
+                        printlog("utils.g.abi int= ", (int)param.args[1]);
+
+                        Class cls = XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader);
+                        Field field = cls.getDeclaredField("h");
+                        field.setAccessible(true);
+                        byte[] h = (byte[])field.get(param.thisObject);
+
+                        printByteArray("utils.g.abi h: ", h);
                     }
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        byte[] r1 = (byte[])param.getResult();
-                        printByteArray("zds r1", r1);
-                    }
-                });
-
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.utils.g",loadPackageParam.classLoader),
-                "b",
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-                    }
-
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        param.setResult(5);
+                        byte[] r = (byte[])param.getResult();
+                        printByteArray("utils.g.abi result:" ,  r);
                     }
                 });
 
     }
 
+    private static void  printlog(String tag, int b){
+        XposedBridge.log(tag + ": "  + b);
+    }
 
+    private static void  printlog(String tag, long b){
+        XposedBridge.log(tag + ": "  + b);
+    }
 
+    private static void  printlog(String tag, boolean b){
+        XposedBridge.log(tag + ":  " + b);
+    }
 
     private static void  printByteArray(String tag, byte[] bytes){
         XposedBridge.log(tag + ": " + ByteArrayToHexString(bytes));
