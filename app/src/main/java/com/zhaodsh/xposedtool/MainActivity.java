@@ -11,10 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        yybhttp yyb = new yybhttp();
-//        yyb._main();
-
-        String.va
         g  ginstance = new g();
         byte[] param = {0x06, 0x00};
         byte[] result = ginstance.encode(param);

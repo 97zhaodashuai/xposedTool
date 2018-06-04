@@ -225,7 +225,7 @@ public class encrpytUtils {
 
     public byte[] decode(byte[] param){
         byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
-        return aa(param, 0, param.length, key);
+        return a(param, 0, param.length, key);
     }
 
 
@@ -267,7 +267,7 @@ public class encrpytUtils {
                             if (!this.b(p0, p1, p2)) {
                                 return null;
                             }
-                            v0 = p0;
+//                            v0 = p0;
                         }
                     }
                     int a1 = v4;
@@ -285,7 +285,7 @@ public class encrpytUtils {
                             if (!this.b(p0, p1, p2)) {
                                 return null;
                             }
-                            b5 = p0;
+//                            b5 = p0;
                         }
                     }
                     this.g = v9;
@@ -458,9 +458,6 @@ public class encrpytUtils {
     {
         this.e = 0;
         this.d = 0;
-        byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
-        this.h = key;
-
 
         int v8 = 16;
         long v6 = a(p0, p1, 4);
@@ -477,8 +474,6 @@ public class encrpytUtils {
 
             v4 = (v4 -  ((((v6 << 4) + v14) ^ (v6 + v2)) ^((v6 >>> 5) + v16))) & 0xffffffffL;
             v6 = (v6 - ((((v4 << 4) + v10) ^(v4 + v2)) ^((v4 >>> 5) + v12))) & 0xffffffffL;
-//            v4 = ((v4 - (((((v6 << 4) + v14) ^ (v6 + v2))) ^ (((v6 >>> 5) + v16))))) & 0xffffffff;
-//            v6 = ((v6 - ((((v4 << 4) + v10) ^ (v4 + v2)) ^ ((v4 >>> 5) + v12))) & 0xffffffff);
             v2 = ((v2 - v18) & 0xffffffff);
             v8 = v9;
             v9 = (v8 - 1);

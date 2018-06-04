@@ -26,16 +26,29 @@ public class yybMain {
 
     public  static void main(String[] args) {
 
-        byte[]  a = {0x0c};
+        byte[]  aaa = new byte[16];
+        aaa[0] =(byte)0x75;
+        aaa[1] = (byte)0x75;
+        aaa[2] = (byte)0xDE;
+        aaa[3] = (byte)0x68;
+        aaa[4] = (byte)0xA9;
+        aaa[5] = (byte)0x48;
+        aaa[6] = (byte)0x22;
+        aaa[7] = (byte)0xBA;
+        aaa[8] = (byte)0x7C;
+        aaa[9] = (byte)0xBA;
+        aaa[10] = (byte)0x23;
+        aaa[11] = (byte)0x43;
+        aaa[12] = (byte)0xAA;
+        aaa[13] = (byte)0x7D;
+        aaa[14] = (byte)0x7;
+        aaa[15] = (byte)0xB9;
 
-        encrpytUtils  eu = new encrpytUtils();
-       // a = eu.encode(a);
 
-        a = new byte[]{(byte)0x71,(byte)0x45,(byte)0xEB,(byte)0xE8,(byte)0x62,(byte)0x95,(byte)0xF5,(byte)0xC7};
-        //a = eu.decode(a);
-        byte[] result_a  = new encrpytUtils().a(a,0);
+        byte[] aab  = new encrpytUtils().decode(aaa);
 
-        System.out.println("zds");
+
+
 
         DownloadRequest();
 //        SuggestRequest();
@@ -156,7 +169,7 @@ public class yybMain {
             post.setHeader("X-Online-Host", "ma.3g.qq.com");
             post.setHeader("Host", "101.227.131.50:80");
             post.setHeader("x-tx-host", "ma.3g.qq.com");
-
+            post.setHeader("Cls", rspClassName);
             // 构建消息实体
             post.setEntity(new ByteArrayEntity(kb(request)));
 
