@@ -4,7 +4,7 @@ import com.qq.taf.jce.JceInputStream;
 import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
 
-class Request extends JceStruct {
+public class Request extends JceStruct {
     static ReqHead c;
     static byte[] d;
     public ReqHead head = null;

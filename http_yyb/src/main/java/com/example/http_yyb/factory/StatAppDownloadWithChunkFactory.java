@@ -6,10 +6,8 @@ import com.example.http_yyb.protocol.Speed;
 import com.example.http_yyb.protocol.StatAppDownlaodWithChunk;
 import com.example.http_yyb.protocol.StatReportItem;
 import com.example.http_yyb.protocol.StatReportRequest;
-import com.example.http_yyb.yybMain;
 import com.qq.taf.jce.JceOutputStream;
 import com.qq.taf.jce.JceStruct;
-import com.sun.org.apache.regexp.internal.RE;
 
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -70,6 +68,8 @@ public class StatAppDownloadWithChunkFactory {
         appdownload.D = 0;
         appdownload.E = "";
 
+        System.out.print(appdownload.toString());
+
         StatReportItem item = new StatReportItem();
         item.a = 14;
         item.b = 0;
@@ -119,7 +119,7 @@ public class StatAppDownloadWithChunkFactory {
 //        jceDisplayer.display(this.o, "excpetionName");
         chunkd.o = "";
 //        jceDisplayer.display(this.p, "dstIp");
-        chunkd.p = "163.177" + (int)(Math.random() * 255 ) + "." + (int)(Math.random() * 255);
+        chunkd.p = "163.177." + (int)(Math.random() * 255 ) + "." + (int)(Math.random() * 255);
 
         return  chunkd;
     }
@@ -156,6 +156,7 @@ public class StatAppDownloadWithChunkFactory {
         byte[] localObject = fa(byte_paramStatAppDownlaodWithChunk.length);
         ByteArrayBuffer localByteArrayBuffer = new ByteArrayBuffer(byte_paramStatAppDownlaodWithChunk.length + 4);
         localByteArrayBuffer.append(localObject, 0, localObject.length);
+        localByteArrayBuffer.append(byte_paramStatAppDownlaodWithChunk, 0, byte_paramStatAppDownlaodWithChunk.length);
         return localByteArrayBuffer.buffer();
     }
 
@@ -166,6 +167,7 @@ public class StatAppDownloadWithChunkFactory {
         for (int i = 0; i < 4; i++)
             arrayOfByte[i] = (byte)(byte)(paramInt >>> 24 - i * 8);
         return arrayOfByte;
+
     }
 
     static public byte[] kb(JceStruct p0) {

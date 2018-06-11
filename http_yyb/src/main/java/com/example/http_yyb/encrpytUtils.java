@@ -225,7 +225,7 @@ public class encrpytUtils {
 
     public byte[] decode(byte[] param){
         byte[] key = {0x6a, 0x69, 0x2a, 0x39, 0x5e, 0x26, 0x34,0x33, 0x55, 0x30, 0x58, 0x2d, 0x7e,0x2e,0x2f,0x28};
-        return a(param, 0, param.length, key);
+        return aa(param, 0, param.length, key);
     }
 
 
@@ -266,8 +266,9 @@ public class encrpytUtils {
                         if (this.f ==v8){
                             if (!this.b(p0, p1, p2)) {
                                 return null;
+                            }else{
+                                v0 = p0;
                             }
-//                            v0 = p0;
                         }
                     }
                     int a1 = v4;
@@ -275,7 +276,7 @@ public class encrpytUtils {
                     byte[] b5 = v0;
                     while ((a1 != 0)) {
                         if (this.f < v8) {
-                            this.c[a2] = (byte) ((b5[((this.e + p1) + this.f)] ^ this.b[this.f]));
+                            this.c[a2] = (byte) (b5[((this.e + p1) + this.f)] ^ this.b[this.f]);
                             a2++;
                             a1--;
                             this.f = (this.f + 1);
@@ -284,28 +285,29 @@ public class encrpytUtils {
                             this.e = (this.d - 8);
                             if (!this.b(p0, p1, p2)) {
                                 return null;
+                            }else{
+                                b5 = p0;
                             }
-//                            b5 = p0;
                         }
                     }
-                    this.g = v9;
-                    byte[] b8 = b5;
-                    while ((this.g < v8)) {
-                        if (this.f < v8) {
-                            if ((b8[((this.e + p1) + this.f)] ^ this.b[this.f]) != 0) {
-                                return null;
-                            }
-                            this.f = this.f + 1;
-                        }
-                        if (this.f == v8) {
-                            this.e = this.d;
-                            if (!this.b(p0, p1, p2)) {
-                                return null;
-                            }
-                            v0 = p0;
-                        }
-                        this.g = (this.g + 1);
-                    }
+//                    this.g = v9;
+//                    byte[] b8 = b5;
+//                    while ((this.g < v8)) {
+//                        if (this.f < v8) {
+//                            if ((b8[((this.e + p1) + this.f)] ^ this.b[this.f]) == 0) {
+//                                return null;
+//                            }
+//                            this.f = this.f + 1;
+//                        }
+//                        if (this.f == v8) {
+//                            this.e = this.d;
+//                            if (!this.b(p0, p1, p2)) {
+//                                return null;
+//                            }
+//                            b8 = p0;
+//                            this.g = (this.g + 1);
+//                        }
+//                    }
                     v0 = this.c;
                     return v0;
                 } else {
@@ -385,7 +387,7 @@ public class encrpytUtils {
         bArr4 = bArr6;
         while (this.g < 8) {
             if (this.f < 8) {
-                if ((bArr4[(this.e + i) + this.f] ^ this.b[this.f]) != 0) {
+                if ((bArr4[(this.e + i) + this.f] ^ this.b[this.f]) == 0) {
                     return null;
                 }
                 this.f++;
