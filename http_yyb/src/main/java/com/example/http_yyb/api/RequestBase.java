@@ -1,6 +1,7 @@
 package com.example.http_yyb.api;
 
 import com.example.http_yyb.Net;
+import com.example.http_yyb.Phone;
 import com.example.http_yyb.ReqHead;
 import com.example.http_yyb.Request;
 import com.example.http_yyb.Response;
@@ -15,10 +16,12 @@ import com.qq.taf.jce.JceStruct;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.ByteArrayBuffer;
 
@@ -43,31 +46,65 @@ public class RequestBase {
         return req;
     }
 
+//    private ReqHead ka(int cmdId, int requestId, Net net) {
+//        ReqHead head = new ReqHead();
+//        head.requestId = requestId;
+//        head.cmdId = cmdId;
+//        head.phoneGuid = "1314036323888842816";
+//
+//        Ticket ticket = new Ticket();
+//        ticket.type = 0;
+//        ticket.value = new byte[0];
+//        head.ticket = ticket;
+//
+//        head.qua = "TMA_411/040447&NA/040447&5.1.1_22_1&111_67_14&google_Nexus5&992019&NA&V3";
+//        head.net = net;
+//        head.areacode = 1796;
+//
+//        Terminal t = new Terminal();
+//        t.imei = "359250052035365";  //
+//        t.macAdress = "48:59:29:f2:73:37";
+//        t.androidId = "9b6a3d46e13c2ecd";
+//        t.androidIdSdCard = "9b6a3d46e13c2ecd";
+//        t.imsi = ""; //Phone.getIMSI();
+//
+//        head.terminal = null;
+//        head.uin = 0;
+//        head.moloDeviceId = "1523864357451{72b28484-e282-4965-9b9d-a2b6ba66c0fc}129";
+//        head.encryptWithPack = 0;
+//        head.isForeground = 1;
+//        head.caller = 1;
+//
+//        System.out.print("head: " + head.toString());
+//        return head;
+//    }
+
+//
     private ReqHead ka(int cmdId, int requestId, Net net) {
         ReqHead head = new ReqHead();
         head.requestId = requestId;
         head.cmdId = cmdId;
-        head.phoneGuid = "1314036323888842816";
+        head.phoneGuid = Phone.getPhoneGUID();//"1314036323888842816";
 
         Ticket ticket = new Ticket();
         ticket.type = 0;
         ticket.value = new byte[0];
         head.ticket = ticket;
 
-        head.qua = "TMA_411/040447&NA/040447&5.1.1_22_1&111_67_14&google_Nexus5&992019&NA&V3";
+        head.qua = Phone.getQua(); //"TMA_411/040447&NA/040447&5.1.1_22_1&111_67_14&google_Nexus5&992019&NA&V3";
         head.net = net;
         head.areacode = 1796;
 
         Terminal t = new Terminal();
-        t.imei = "359250052035365";  //todo
-        t.macAdress = "48:59:29:f2:73:37";
-        t.androidId = "9b6a3d46e13c2ecd";
-        t.androidIdSdCard = "9b6a3d46e13c2ecd";
-        t.imsi = null;
+        t.imei = Phone.getIMEI(); //"359250052035365";  //
+        t.macAdress = Phone.getMac(); //"48:59:29:f2:73:37";
+        t.androidId = Phone.getAndroidId(); //"9b6a3d46e13c2ecd";
+        t.androidIdSdCard = Phone.getAndroidId(); //"9b6a3d46e13c2ecd";
+        t.imsi = Phone.getIMSI();
 
         head.terminal = null;
         head.uin = 0;
-        head.moloDeviceId = "1523864357451{72b28484-e282-4965-9b9d-a2b6ba66c0fc}129";
+        head.moloDeviceId = Phone.getmoloDeviceId();//"1523864357451{72b28484-e282-4965-9b9d-a2b6ba66c0fc}129";
         head.encryptWithPack = 0;
         head.isForeground = 1;
         head.caller = 1;
@@ -87,13 +124,18 @@ public class RequestBase {
     }
 
 
-    public void httpPost(Request request, String rspClassName) {
+    public void httpPost(String ip, int port, Request request, String rspClassName) {
 
         HttpPost post = null;
         try {
-            HttpHost proxy = new HttpHost("127.0.0.1", 8888);
+            ip = "171.10.31.73";
+            port = 8080;
+
+            HttpHost proxy = new HttpHost(ip, port);
             RequestConfig requestConfig = RequestConfig.custom().setProxy(proxy).build();
             CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+
+//            HttpClient httpclient = new DefaultHttpClient();
 
             post = new HttpPost("http://101.227.131.50:80");
             // 构造消息头

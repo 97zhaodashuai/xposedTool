@@ -24,11 +24,11 @@ public class StatAppDownloadWithChunkFactory {
 
         StatAppDownlaodWithChunk  appdownload = new StatAppDownlaodWithChunk();
 
-        appdownload.a = 12224511;   //appid
-        appdownload.b = 68724751;   //apkid
-        appdownload.c = 244964;     //revision
-        appdownload.d = "123.118.2.109";  //clientIp
-        appdownload.g = 5742587;  //fileSize
+        appdownload.a = 11673473;   //appid
+        appdownload.b = 21573197;   //apkid
+        appdownload.c = 0;     //revision
+        appdownload.d = "211." + (int)(Math.random() * 255 )  +  "." + (int)(Math.random() * 255 ) + "." + (int)(Math.random() * 255);  //clientIp
+        appdownload.g = 3087171;  //fileSize
 
         appdownload.e = System.currentTimeMillis() - (2000 + (int)(Math.random() * 100));//starTime
         appdownload.f = 2000 - (int)(Math.random() * 100);//costTime
@@ -39,10 +39,10 @@ public class StatAppDownloadWithChunkFactory {
 
         appdownload.i = 0; //result
         appdownload.j = 2008; //scene
-        appdownload.k = 2001;  //sourceScene
+        appdownload.k = 200701;  //sourceScene
 
 //        jceDisplayer.display(this.l, "extraData");
-        appdownload.l = "null|-100";
+        appdownload.l = "null|蓝宝|-100";
         appdownload.m = 2;
         appdownload.n = 0;
 //        jceDisplayer.display(this.o, "chunkCost");
@@ -53,7 +53,7 @@ public class StatAppDownloadWithChunkFactory {
 
         appdownload.r = 0;
         appdownload.s = "";
-        appdownload.t = 18;
+        appdownload.t = 9;
         appdownload.u = "";
         appdownload.v = 0;
         appdownload.w = "06_001";
@@ -88,9 +88,9 @@ public class StatAppDownloadWithChunkFactory {
         AppChunkDownlaod  chunkd = new AppChunkDownlaod();
 
 //        jceDisplayer.display(this.a, "downloadUrl");
-        chunkd.a = "http://dd.myapp.com/16891/7EFDE5CD42CBA5BCEC586BFEB5DA8373.apk?fsname=com.chinawidth.nansha_2.6_18.apk";
+        chunkd.a = "http://dd.myapp.com/16891/E44736B4D0D5881243F1F78D1263173B.apk?fsname=com.chinabluecollar.fragmentactivity_1.8_9.apk";
 //        jceDisplayer.display(this.b, "finalDownloadUrl");
-        chunkd.b = "http://111.202.99.13/dd.myapp.com/16891/7EFDE5CD42CBA5BCEC586BFEB5DA8373.apk?mkey=5b0559946d02508e&f=1b82&c=0&fsname=com.chinawidth.nansha_2.6_18.apk&p=.apk";
+        chunkd.b = "http://124.193.228.204/dd.myapp.com/16891/E44736B4D0D5881243F1F78D1263173B.apk?mkey=5b1e74819207638c&f=59ae&c=0&fsname=com.chinabluecollar.fragmentactivity_1.8_9.apk&p=.apk";
 //        jceDisplayer.display(this.c, "netType");
         chunkd.c = 1;
 //        jceDisplayer.display(this.d, "startPos");
@@ -134,12 +134,12 @@ public class StatAppDownloadWithChunkFactory {
     static  Speed buildSpeed(){
         Speed speed = new Speed();
         speed.a = 1;
-        speed.b = 5742587;
+        speed.b = 3087171;
         speed.c =  2000 - (int)(Math.random() * 100);
         speed.d = "";
         speed.e = -1;
         speed.f = 0;
-        speed.g = "http://111.202.99.13/dd.myapp.com/16891/7EFDE5CD42CBA5BCEC586BFEB5DA8373.apk?mkey=5b0559946d02508e&f=1b82&c=0&fsname=com.chinawidth.nansha_2.6_18.apk&p=.apk";
+        speed.g = "http://124.193.228.204/dd.myapp.com/16891/E44736B4D0D5881243F1F78D1263173B.apk?mkey=5b1e74819207638c&f=59ae&c=0&fsname=com.chinabluecollar.fragmentactivity_1.8_9.apk&p=.apk";
 //        jceDisplayer.display(this.a, "netType");
 //        jceDisplayer.display(this.b, "downSize");
 //        jceDisplayer.display(this.c, "costTime");
