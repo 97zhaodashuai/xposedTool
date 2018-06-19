@@ -41,25 +41,25 @@ public class yybhook {
                 });
 
 
-
-        XposedHelpers.findAndHookMethod(
-                XposedHelpers.findClass("com.tencent.assistant.utils.f",loadPackageParam.classLoader),
-                "a",
-                int.class,
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                        int p1 = (int)param.args[0];
-                        XposedBridge.log("f.a: " + String.valueOf(p1));
-
-                    }
-                    //
-                    @Override
-                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        byte[] p2 = (byte[]) param.getResult();
-                        printByteArray("response d.a result: " , p2);
-                    }
-                });
+//
+//        XposedHelpers.findAndHookMethod(
+//                XposedHelpers.findClass("com.tencent.assistant.utils.f",loadPackageParam.classLoader),
+//                "a",
+//                int.class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                        int p1 = (int)param.args[0];
+//                        XposedBridge.log("f.a: " + String.valueOf(p1));
+//
+//                    }
+//                    //
+//                    @Override
+//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                        byte[] p2 = (byte[]) param.getResult();
+//                        printByteArray("response d.a result: " , p2);
+//                    }
+//                });
 
 
 
