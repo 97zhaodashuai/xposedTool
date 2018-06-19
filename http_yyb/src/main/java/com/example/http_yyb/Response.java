@@ -30,15 +30,15 @@ public class Response extends JceStruct {
 
     public void readFrom(JceInputStream paramJceInputStream)
     {
-        if (c == null)
+        if (c == null){
             c = new RspHead();
-        a = ((RspHead)paramJceInputStream.read(c, 0, true));
-        if (d == null)
-        {
-            d = (byte[])new byte[1];
-            ((byte[])d)[0] = (byte)0;
         }
-        b = ((byte[])paramJceInputStream.read(d, 1, true));
+        a = ((RspHead)paramJceInputStream.read(c, 0, true));
+        if (d == null) {
+            d = new byte[1];
+            d[0] = (byte)0;
+        }
+        b = (byte[])paramJceInputStream.read(d, 1, true);
     }
 
     public void writeTo(JceOutputStream paramJceOutputStream)
